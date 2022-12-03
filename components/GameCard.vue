@@ -1,11 +1,11 @@
 <template>
-  <div class="card-container" :class="{ clicked: clicked }">
-    <div v-show="!clicked" class="card_front" @click="onClickFront">
+  <div class="card-container" :class="{ selected: selected }" @click="onClick">
+    <div v-show="isFront" class="card_front">
       <!-- <p class="card_front_main-value" v-cloak>{{ frontMainValue }}</p>
       <p class="card_front_sub-value">{{ frontSubValue }}</p> -->
       <img :src="imageUrl" alt="" />
     </div>
-    <div v-show="clicked" class="card_back" @click="onClickBack">
+    <div v-show="!isFront" class="card_back">
       <p class="card_back_main-value">{{ backMainValue }}</p>
       <p class="card_back_sub-value">{{ backSubValue }}</p>
     </div>
@@ -28,27 +28,33 @@ export default {
     },
     backSubValue: {},
     imageUrl: {},
+    isFront: {
+      default: true,
+      type: Boolean,
+    },
   },
   data() {
     return {
-      clicked: false,
+      selected: false,
       explanation: 'トランプ、ハートの10です',
     }
   },
   methods: {
-    onClickFront() {
-      this.clicked = true
-      this.$emit('add-selected-array', this.cardId)
-    },
-    onClickBack() {
-      this.clicked = false
-      this.$emit('remove-selected-array', this.cardId)
+    onClick() {
+      if (this.selected) {
+        this.$emit('remove-selected-array', this.cardId)
+        this.selected = false
+      } else if (!this.selected) {
+        this.$emit('add-selected-array', this.cardId)
+        this.selected = true
+      }
     },
   },
 }
 </script>
 <style scoped>
 .card-container {
+  border: 1px solid rgba(0, 0, 0, 0);
   width: 113px;
   height: 160px;
   /* margin: 20px; */
@@ -77,7 +83,7 @@ export default {
   left: 10%;
   margin: 0;
 }
-.clicked {
+.selected {
   border: 1px solid blue;
   background-color: #ddf;
 }
