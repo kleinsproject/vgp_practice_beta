@@ -1,6 +1,11 @@
 <template>
   <div id="command-palette-container">
-    <div v-for="command in commands" :key="command.id" class="command-button">
+    <div
+      v-for="command in commands"
+      :key="command.id"
+      class="command-button"
+      @click="turn"
+    >
       {{ command.name }}
     </div>
   </div>
@@ -10,13 +15,23 @@ export default {
   data() {
     return {
       commands: [
-        { id: 1, name: '裏返す', functionName: 'turn' },
-        { id: 2, name: '移動する', functionName: 'move' },
-        { id: 3, name: 'シャッフル', functionName: 'shuffle' },
-        { id: 4, name: 'リセット', functionName: 'reset' },
-        { id: 5, name: '裏返す', functionName: 'turn' },
+        { id: 1, name: '裏返す', functionName: 'turn', onClick: 'turn' },
+        { id: 2, name: '移動する', functionName: 'move', onClick: 'move' },
+        {
+          id: 3,
+          name: 'シャッフル',
+          functionName: 'shuffle',
+          onClick: 'shuffle',
+        },
+        { id: 4, name: 'リセット', functionName: 'reset', onClick: 'reset' },
+        { id: 5, name: '裏返す', functionName: 'turn', onClick: 'turn' },
       ],
     }
+  },
+  methods: {
+    turn() {
+      this.$emit('turn')
+    },
   },
 }
 </script>
