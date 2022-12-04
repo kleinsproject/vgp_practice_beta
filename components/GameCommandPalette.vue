@@ -4,7 +4,7 @@
       v-for="command in commands"
       :key="command.id"
       class="command-button"
-      @click="turn"
+      @click="doCommand(command.functionName)"
     >
       {{ command.name }}
     </div>
@@ -29,8 +29,8 @@ export default {
     }
   },
   methods: {
-    turn() {
-      this.$emit('turn')
+    doCommand(functionName) {
+      this.$emit('doCommand', functionName)
     },
   },
 }
@@ -59,6 +59,7 @@ export default {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  user-select: none;
 }
 .command-button:hover {
   border: 1px solid red;
