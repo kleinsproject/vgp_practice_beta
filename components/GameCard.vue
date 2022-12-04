@@ -1,9 +1,7 @@
 <template>
   <div class="card-container" :class="{ selected: selected }" @click="onClick">
     <div v-show="isFront" class="card_front">
-      <!-- <p class="card_front_main-value" v-cloak>{{ frontMainValue }}</p>
-      <p class="card_front_sub-value">{{ frontSubValue }}</p> -->
-      <img :src="imageUrl" alt="" />
+      <img :src="imageUrl" alt="" class="card_front_img" />
     </div>
     <div v-show="!isFront" class="card_back">
       <p class="card_back_main-value">{{ backMainValue }}</p>
@@ -54,21 +52,21 @@ export default {
 </script>
 <style scoped>
 .card-container {
-  border: 1px solid rgba(0, 0, 0, 0);
-  width: 113px;
-  height: 160px;
-  /* margin: 20px; */
-  /* border: 1px solid #000; */
+  width: fit-content;
+  height: fit-content;
+  /* transition: all 0.5s, border 0.05s; */
   box-sizing: border-box;
 }
 
 .card_front,
 .card_back {
   position: relative;
-  width: 100%;
-  height: 100%;
 }
-.card_front_main-value,
+.card_front .card_front_img,
+.card_back {
+  width: 120px;
+  height: 170px;
+}
 .card_back_main-value {
   position: absolute;
   top: 50%;
@@ -76,7 +74,6 @@ export default {
   transform: translate(-50%, -50%);
   margin: 0;
 }
-.card_front_sub-value,
 .card_back_sub-value {
   position: absolute;
   top: 10%;
@@ -84,7 +81,6 @@ export default {
   margin: 0;
 }
 .selected {
-  border: 1px solid blue;
-  background-color: #ddf;
+  box-shadow: 0 0 2px 3px rgba(100, 100, 255, 0.3);
 }
 </style>
