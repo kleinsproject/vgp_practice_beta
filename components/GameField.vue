@@ -2,9 +2,11 @@
   <div>
     <p>場</p>
     <draggable
-      :list="cards"
-      id="field-container"
-      :options="{ animation: 200, delay: 100 }"
+      v-model="cards"
+      id="field_container"
+      :options="{ animation: 100 }"
+      @start="onStart"
+      @end="onEnd"
     >
       <transition-group class="transition_container" :name="transitionName">
         <GameCard
@@ -35,6 +37,7 @@ export default {
   },
   data() {
     return {
+      transitionName: 'list',
       selectedCards: [],
       returnCards: [],
       decks: [
@@ -53,6 +56,7 @@ export default {
           imageFrontUrl: require('@/static/image/torannpu-illust1.png'),
           imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
+          order: 1,
         },
         {
           id: 2,
@@ -64,6 +68,7 @@ export default {
           imageFrontUrl: require('@/static/image/torannpu-illust2.png'),
           imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
+          order: 2,
         },
         {
           id: 3,
@@ -75,6 +80,7 @@ export default {
           imageFrontUrl: require('@/static/image/torannpu-illust3.png'),
           imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
+          order: 3,
         },
         {
           id: 4,
@@ -86,6 +92,7 @@ export default {
           imageFrontUrl: require('@/static/image/torannpu-illust4.png'),
           imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
+          order: 4,
         },
         {
           id: 5,
@@ -97,6 +104,7 @@ export default {
           imageFrontUrl: require('@/static/image/torannpu-illust5.png'),
           imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
+          order: 5,
         },
         {
           id: 6,
@@ -108,6 +116,7 @@ export default {
           imageFrontUrl: require('@/static/image/torannpu-illust6.png'),
           imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
+          order: 6,
         },
         {
           id: 7,
@@ -119,9 +128,15 @@ export default {
           imageFrontUrl: require('@/static/image/torannpu-illust7.png'),
           imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
+          order: 7,
         },
       ],
     }
+  },
+  computed: {
+    // cardsDisp() {
+    //   return this.sortCardsByOrder()
+    // },
   },
   methods: {
     addSelectedArray(id) {
@@ -167,7 +182,7 @@ export default {
 }
 </script>
 <style scoped>
-#field-container {
+#field_container {
   position: fixed;
   top: 0;
   left: 200px;
@@ -177,14 +192,16 @@ export default {
   height: 70vh;
   border: 1px solid #000;
   box-sizing: border-box;
+}
+.transition_container {
   display: flex;
   flex-wrap: wrap;
 }
+.list-move {
+  transition: 0.5s;
+}
 .margin {
   margin: 10px;
-}
-.sortable-chosen {
-  opacity: 0.1;
-  background-color: #dcdcdc;
+  /* transition: 0.5s; */
 }
 </style>

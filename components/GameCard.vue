@@ -65,11 +65,9 @@ export default {
 </script>
 <style scoped>
 .card-container {
-  border: 1px solid rgba(0, 0, 0, 0);
-  width: 113px;
-  height: 160px;
-  /* margin: 20px; */
-  /* border: 1px solid #000; */
+  width: fit-content;
+  height: fit-content;
+  /* transition: all 0.5s, border 0.05s; */
   box-sizing: border-box;
   user-select: none;
 }
@@ -77,8 +75,6 @@ export default {
 .card_front,
 .card_back {
   position: relative;
-  width: 100%;
-  height: 100%;
 }
 .card_front .card_front_img,
 .card_back .card_back_img {
@@ -87,8 +83,7 @@ export default {
 }
 
 .selected {
-  border: 1px solid blue;
-  background-color: #ddf;
+  box-shadow: 0 0 2px 3px rgba(100, 100, 255, 0.3);
 }
 .dragged {
   opacity: 0.1;

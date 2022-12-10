@@ -1,7 +1,7 @@
 <template>
   <div>
     <GameField ref="child" />
-    <GameCommandPalette @turn="turn" />
+    <GameCommandPalette @doCommand="doCommand" />
     <GameSidebar />
   </div>
 </template>
@@ -10,8 +10,8 @@
 export default {
   name: 'IndexPage',
   methods: {
-    turn() {
-      this.$refs.child.turn()
+    doCommand(functionName) {
+      this.$refs.child[functionName]()
     },
   },
 }
