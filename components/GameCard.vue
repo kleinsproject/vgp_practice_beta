@@ -1,11 +1,16 @@
 <template>
-  <div class="card-container" :class="{ selected: selected }" @click="onClick">
+  <div
+    class="card-container"
+    :class="{ selected: selected, dragged: dragged }"
+    @click="onClick"
+    @drag="dragStart"
+    @dragend="dragEnd"
+  >
     <div v-show="isFront" class="card_front">
-      <img :src="imageUrl" alt="" class="card_front_img" />
+      <img :src="imageFrontUrl" alt="" class="card_front_img" />
     </div>
     <div v-show="!isFront" class="card_back">
-      <p class="card_back_main-value">{{ backMainValue }}</p>
-      <p class="card_back_sub-value">{{ backSubValue }}</p>
+      <img :src="imageBackUrl" alt="" class="card_back_img" />
     </div>
   </div>
 </template>
@@ -25,7 +30,8 @@ export default {
       Type: String,
     },
     backSubValue: {},
-    imageUrl: {},
+    imageFrontUrl: {},
+    imageBackUrl: {},
     isFront: {
       default: true,
       type: Boolean,
@@ -34,6 +40,7 @@ export default {
   data() {
     return {
       selected: false,
+      dragged: false,
       explanation: 'トランプ、ハートの10です',
     }
   },
@@ -47,6 +54,12 @@ export default {
         this.selected = true
       }
     },
+    dragStart() {
+      this.dragged = true
+    },
+    dragEnd() {
+      this.dragged = false
+    },
   },
 }
 </script>
@@ -56,6 +69,7 @@ export default {
   height: fit-content;
   /* transition: all 0.5s, border 0.05s; */
   box-sizing: border-box;
+  user-select: none;
 }
 
 .card_front,
@@ -63,24 +77,20 @@ export default {
   position: relative;
 }
 .card_front .card_front_img,
-.card_back {
+.card_back .card_back_img {
   width: 120px;
   height: 170px;
 }
-.card_back_main-value {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
-}
-.card_back_sub-value {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  margin: 0;
-}
+
 .selected {
   box-shadow: 0 0 2px 3px rgba(100, 100, 255, 0.3);
+}
+.dragged {
+  opacity: 0.1;
+  background-color: #dcdcdc;
+}
+.dragged {
+  opacity: 0.1;
+  background-color: #dcdcdc;
 }
 </style>

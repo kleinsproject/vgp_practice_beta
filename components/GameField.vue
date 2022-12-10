@@ -17,7 +17,8 @@
           :frontSubValue="card.frontSubValue"
           :backMainValue="card.backMainValue"
           :backSubValue="card.backSubValue"
-          :imageUrl="card.imageUrl"
+          :imageFrontUrl="card.imageFrontUrl"
+          :imageBackUrl="card.imageBackUrl"
           :isFront="card.isFront"
           :order="card.order"
           @add-selected-array="addSelectedArray"
@@ -52,7 +53,8 @@ export default {
           backMainValue: '裏',
           backSubValue: null,
           explanation: 'トランプ、ハートの10です',
-          imageUrl: require('@/static/image/torannpu-illust1.png'),
+          imageFrontUrl: require('@/static/image/torannpu-illust1.png'),
+          imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
           order: 1,
         },
@@ -63,7 +65,8 @@ export default {
           backMainValue: '裏',
           backSubValue: null,
           explanation: 'トランプ、ハートの10です',
-          imageUrl: require('@/static/image/torannpu-illust2.png'),
+          imageFrontUrl: require('@/static/image/torannpu-illust2.png'),
+          imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
           order: 2,
         },
@@ -74,7 +77,8 @@ export default {
           backMainValue: '裏',
           backSubValue: null,
           explanation: 'トランプ、ハートの10です',
-          imageUrl: require('@/static/image/torannpu-illust3.png'),
+          imageFrontUrl: require('@/static/image/torannpu-illust3.png'),
+          imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
           order: 3,
         },
@@ -85,7 +89,8 @@ export default {
           backMainValue: '裏',
           backSubValue: null,
           explanation: 'トランプ、ハートの10です',
-          imageUrl: require('@/static/image/torannpu-illust4.png'),
+          imageFrontUrl: require('@/static/image/torannpu-illust4.png'),
+          imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
           order: 4,
         },
@@ -96,7 +101,8 @@ export default {
           backMainValue: '裏',
           backSubValue: null,
           explanation: 'トランプ、ハートの10です',
-          imageUrl: require('@/static/image/torannpu-illust5.png'),
+          imageFrontUrl: require('@/static/image/torannpu-illust5.png'),
+          imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
           order: 5,
         },
@@ -107,7 +113,8 @@ export default {
           backMainValue: '裏',
           backSubValue: null,
           explanation: 'トランプ、ハートの10です',
-          imageUrl: require('@/static/image/torannpu-illust6.png'),
+          imageFrontUrl: require('@/static/image/torannpu-illust6.png'),
+          imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
           order: 6,
         },
@@ -118,7 +125,8 @@ export default {
           backMainValue: '裏',
           backSubValue: null,
           explanation: 'トランプ、ハートの10です',
-          imageUrl: require('@/static/image/torannpu-illust7.png'),
+          imageFrontUrl: require('@/static/image/torannpu-illust7.png'),
+          imageBackUrl: require('@/static/image/card_back.jpeg'),
           isFront: true,
           order: 7,
         },
@@ -158,14 +166,17 @@ export default {
     sort() {
       this.cards.sort((a, b) => a.order - b.order)
     },
-    onStart() {
+    onStart(event) {
+      event.item.classList.add('drag_ghost')
+      // console.log(event.item.classList, new Date())
       this.transitionName = 'none'
     },
-    onEnd() {
+    onEnd(event) {
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].order = i + 1
       }
       this.transitionName = 'list'
+      event.item.classList.remove('drag_ghost')
     },
   },
 }
@@ -192,9 +203,5 @@ export default {
 .margin {
   margin: 10px;
   /* transition: 0.5s; */
-}
-.sortable-ghost {
-  opacity: 0.1;
-  background-color: #dcdcdc;
 }
 </style>
