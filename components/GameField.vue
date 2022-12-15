@@ -1,30 +1,31 @@
 <template>
-    <draggable
-      v-model="cards"
-      id="field_container"
-      :options="{ animation: 100 }"
-      @start="onStart"
-      @end="onEnd"
-    >
+  <draggable
+    v-model="cards"
+    id="field_container"
+    :options="{ animation: 100 }"
+    @start="onStart"
+    @end="onEnd"
+    group="group"
+  >
     <transition-group class="transition_container" :name="isTransition">
-        <GameCard
-          v-for="card in cards"
-          :key="card.id"
-          :cardId="card.id"
-          :frontMainValue="card.frontMainValue"
-          :frontSubValue="card.frontSubValue"
-          :backMainValue="card.backMainValue"
-          :backSubValue="card.backSubValue"
-          :imageFrontUrl="card.imageFrontUrl"
-          :imageBackUrl="card.imageBackUrl"
-          :isFront="card.isFront"
-          :order="card.order"
-          @add-selected-array="addSelectedArray"
-          @remove-selected-array="removeSelectedArray"
-          class="margin"
-        />
-      </transition-group>
-    </draggable>
+      <GameCard
+        v-for="card in cards"
+        :key="card.id"
+        :cardId="card.id"
+        :frontMainValue="card.frontMainValue"
+        :frontSubValue="card.frontSubValue"
+        :backMainValue="card.backMainValue"
+        :backSubValue="card.backSubValue"
+        :imageFrontUrl="card.imageFrontUrl"
+        :imageBackUrl="card.imageBackUrl"
+        :isFront="card.isFront"
+        :order="card.order"
+        @add-selected-array="addSelectedArray"
+        @remove-selected-array="removeSelectedArray"
+        class="margin"
+      />
+    </transition-group>
+  </draggable>
 </template>
 <script>
 import draggable from 'vuedraggable'
@@ -32,6 +33,10 @@ export default {
   components: {
     draggable,
   },
+  props: {
+    areaNum: {},
+  },
+
   data() {
     return {
       isTransition: 'valid',
@@ -44,7 +49,7 @@ export default {
       ],
       cards: [
         {
-          id: 1,
+          id: 1 + 7 * (this.areaNum - 1),
           frontMainValue: 10,
           frontSubValue: 'heart',
           backMainValue: '裏',
@@ -56,7 +61,7 @@ export default {
           order: 1,
         },
         {
-          id: 2,
+          id: 2 + 7 * (this.areaNum - 1),
           frontMainValue: 8,
           frontSubValue: 'dia',
           backMainValue: '裏',
@@ -68,7 +73,7 @@ export default {
           order: 2,
         },
         {
-          id: 3,
+          id: 3 + 7 * (this.areaNum - 1),
           frontMainValue: 'K',
           frontSubValue: 'spade',
           backMainValue: '裏',
@@ -80,7 +85,7 @@ export default {
           order: 3,
         },
         {
-          id: 4,
+          id: 4 + 7 * (this.areaNum - 1),
           frontMainValue: 'A',
           frontSubValue: 'clover',
           backMainValue: '裏',
@@ -92,7 +97,7 @@ export default {
           order: 4,
         },
         {
-          id: 5,
+          id: 5 + 7 * (this.areaNum - 1),
           frontMainValue: 'Q',
           frontSubValue: 'spade',
           backMainValue: '裏',
@@ -104,7 +109,7 @@ export default {
           order: 5,
         },
         {
-          id: 6,
+          id: 6 + 7 * (this.areaNum - 1),
           frontMainValue: 'Q',
           frontSubValue: 'spade',
           backMainValue: '裏',
@@ -116,7 +121,7 @@ export default {
           order: 6,
         },
         {
-          id: 7,
+          id: 7 + 7 * (this.areaNum - 1),
           frontMainValue: 'Q',
           frontSubValue: 'spade',
           backMainValue: '裏',
