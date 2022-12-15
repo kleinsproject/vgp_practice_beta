@@ -177,19 +177,15 @@ export default {
 </script>
 <style scoped>
 #field_container {
-  position: fixed;
-  top: 0;
-  left: 200px;
-  width: calc(100% - 260px);
-  margin: 30px;
-  padding: 50px;
-  height: 70vh;
+  padding: 20px;
   border: 1px solid #000;
   box-sizing: border-box;
 }
 .transition_container {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
 }
 .list-move {
   transition: 0.5s;
