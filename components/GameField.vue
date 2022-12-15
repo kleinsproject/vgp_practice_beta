@@ -133,14 +133,8 @@ export default {
       ],
     }
   },
-  computed: {
-    // cardsDisp() {
-    //   return this.sortCardsByOrder()
-    // },
-  },
   methods: {
     addSelectedArray(id) {
-      console.log(id)
       this.selectedCards.push(id)
     },
     removeSelectedArray(id) {
