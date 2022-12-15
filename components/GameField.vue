@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <p>場</p>
     <draggable
       v-model="cards"
       id="field_container"
@@ -8,7 +6,7 @@
       @start="onStart"
       @end="onEnd"
     >
-      <transition-group class="transition_container" :name="transitionName">
+    <transition-group class="transition_container" :name="isTransition">
         <GameCard
           v-for="card in cards"
           :key="card.id"
@@ -27,7 +25,6 @@
         />
       </transition-group>
     </draggable>
-  </div>
 </template>
 <script>
 import draggable from 'vuedraggable'
@@ -37,7 +34,7 @@ export default {
   },
   data() {
     return {
-      transitionName: 'list',
+      isTransition: 'valid',
       selectedCards: [],
       returnCards: [],
       decks: [
@@ -138,7 +135,7 @@ export default {
       this.selectedCards.push(id)
     },
     removeSelectedArray(id) {
-      this.selectedCards = this.selectedCards.filter((card) => card !== id)
+      this.selectedCards = this.selectedCards.filter((cardId) => cardId !== id)
     },
     turn() {
       this.returnCards = this.cards.filter((card) =>
@@ -163,14 +160,20 @@ export default {
     onStart(event) {
       event.item.classList.add('drag_ghost')
       // console.log(event.item.classList, new Date())
-      this.transitionName = 'none'
+      this.$emit('disable-transition')
     },
     onEnd(event) {
       for (let i = 0; i < this.cards.length; i++) {
         this.cards[i].order = i + 1
       }
-      this.transitionName = 'list'
+      this.$emit('enable-transition')
       event.item.classList.remove('drag_ghost')
+    },
+    enableTransition() {
+      this.isTransition = 'valid'
+    },
+    disableTransition() {
+      this.isTransition = 'invalid'
     },
   },
 }
@@ -187,7 +190,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.list-move {
+.valid-move {
   transition: 0.5s;
 }
 .margin {
