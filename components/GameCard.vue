@@ -2,8 +2,8 @@
   <div
     class="card-container"
     :class="{ selected: selected, dragged: dragged }"
-    @click="onClick"
-    @drag="dragStart"
+    @click.stop="onClick"
+    @dragstart="dragStart"
     @dragend="dragEnd"
   >
     <div v-show="isFront" class="card_front">
