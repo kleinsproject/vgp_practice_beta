@@ -65,21 +65,20 @@ export default {
 </script>
 <style scoped>
 .card-container {
-  width: fit-content;
-  height: fit-content;
-  /* transition: all 0.5s, border 0.05s; */
   box-sizing: border-box;
   user-select: none;
+  height: fit-content;
 }
 
 .card_front,
 .card_back {
   position: relative;
+  height: 113.25px;
+  width: 80px;
 }
 .card_front .card_front_img,
 .card_back .card_back_img {
-  width: 120px;
-  height: 170px;
+  width: 100%;
 }
 
 .selected {
